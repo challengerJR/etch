@@ -4,10 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
-    <script src="script.js"></script>
+    <div id="container"></div>
+    <script>
+        const container = document.getElementById("container");
+        container.style.cssText = "background-color:red;display:flex;gap:10px;flex-wrap:wrap;width:max-content;";
+        const innerDiv = document.createElement("div");
+        innerDiv.style.cssText = "width:100%;aspect-ratio:1/1;background-color:blue;flex:1 1 calc(25% - 10px);";
+        let fixer;
+       
+        //sets up grid
+        let i=0;
+        while (i<16){
+
+        innerDiv.setAttribute("id", i);
+        container.appendChild(innerDiv.cloneNode(true));
+        document.getElementById(i).addEventListener("mouseover", mouseColor);
+        i++;}
+        
+        function mouseColor(){
+            
+            let square = document.getElementById(this.id);
+            console.log(square.style.backgroundColor)
+            if (square.style.backgroundColor == "blue"){
+            square.style.backgroundColor = "red";
+            } 
+            else if (square.style.backgroundColor == "red"){
+            square.style.backgroundColor = "blue";
+            } 
+            
+        }
+
+
+
+       
+        
+          </script>
 </body>
 </html>
