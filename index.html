@@ -6,40 +6,113 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="container"></div>
-    <script>
-        const container = document.getElementById("container");
-        container.style.cssText = "background-color:red;display:flex;gap:10px;flex-wrap:wrap;width:max-content;";
+    <div id="top"></div>
+<div id="container"></div>
+
+
+
+<script>
+let i=0;
+let db=25;
+
+
+
+const container = document.getElementById("container");
+const input = document.createElement("input");
+const button = document.createElement("button");
+button.innerText = "drawboard";
+const button2 = document.createElement("button");
+button2.innerText = "recalc";
+const inputBtn = document.querySelector("input");
+const btn = document.querySelector("button");
+
+const topBtn = document.getElementById("top");
+
+
+
+topBtn.append(input);
+topBtn.append(button2);
+topBtn.append(button);
+//click button to get input
+button.addEventListener("click", drawBoard);
+button2.addEventListener("click", recalc);
+//const buttonValue = input.value; // This will store "Submit"
+//console.log("Button value:", buttonValue);
+//buttonValue = "";
+
+//evaluate input
+
+
+//calculate the amount of squares needed across
+//assign that to newFlex
+
+
+        container.style.cssText = "background-color:red;display:flex;gap:0px;flex-wrap:wrap;width:max-content;width:500px;";
         const innerDiv = document.createElement("div");
-        innerDiv.style.cssText = "width:100%;aspect-ratio:1/1;background-color:blue;flex:1 1 calc(25% - 10px);";
-        let fixer;
+        innerDiv.style.cssText = "width:100%;aspect-ratio:1/1;background-color:blue;";
+
+
        
         //sets up grid
-        let i=0;
-        while (i<16){
 
+
+function drawBoard(newSquare) {
+    reset();
+    let i=0;
+    
+        while (i<newSquare){
+            let newFlexer = Math.sqrt(db);
+    let newFlex = ((100/newFlexer))+"%";
         innerDiv.setAttribute("id", i);
+        innerDiv.setAttribute("class", "innerDiv");
+        innerDiv.style.flexShrink = "1";
+        innerDiv.style.flexGrow = "1";
+        innerDiv.style.flexBasis = newFlex;
         container.appendChild(innerDiv.cloneNode(true));
+        // can this be done with a single event listener???
         document.getElementById(i).addEventListener("mouseover", mouseColor);
         i++;}
         
         function mouseColor(){
             
             let square = document.getElementById(this.id);
-            console.log(square.style.backgroundColor)
             if (square.style.backgroundColor == "blue"){
             square.style.backgroundColor = "red";
             } 
-            else if (square.style.backgroundColor == "red"){
-            square.style.backgroundColor = "blue";
-            } 
+            //else if (square.style.backgroundColor == "red"){
+            //square.style.backgroundColor = "blue";
+            //} 
             
+        }}
+
+        function reset(){
+            console.log("reset?")
+            const elements = document.getElementsByClassName("innerDiv");
+while(elements[0]){elements[0].parentNode.removeChild(elements[0]);};
+}
+
+            
+
+        function recalc(){db = input.value;
+            let result = Math.sqrt(db);    
+            let isInt = Math.floor(result);
+            let newSquare = isInt*isInt;
+            console.log("newSquare =" + newSquare)
+            drawBoard(newSquare);
+            //if (isInt === false) {db--; console.log(isInt + "- and result - " + result)}
+           // else if (isInt === true) {
+          //      reset();
+          //      drawBoard(result);
+          //  return;}
+            //check input against square root
+            //decrement
+            //take largest number that is a square root
+            //draw board
         }
 
 
+</script>
 
-       
-        
-          </script>
 </body>
 </html>
+
